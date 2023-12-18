@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biểu đồ đường cong</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+    <button onclick="toggleCurvedLines()">Chuyển đổi thành đường cong</button>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var data = {
+            labels: ['1', '2', '3', '4', '5'],
+            datasets: [
+                {
+                    label: 'Đường 1',
+                    data: [10, 15, 13, 17, 8],
+                    borderColor: 'red',
+                    fill: false,
+                    cubicInterpolationMode: 'monotone' // Chuyển đổi thành đường cong
+                },
+                {
+                    label: 'Đường 2',
+                    data: [8, 12, 10, 14, 7],
+                    borderColor: 'blue',
+                    fill: false,
+                    cubicInterpolationMode: 'monotone' // Chuyển đổi thành đường cong
+                },
+                {
+                    label: 'Đường 3',
+                    data: [5, 9, 7, 11, 9],
+                    borderColor: 'green',
+                    fill: false,
+                    cubicInterpolationMode: 'monotone' // Chuyển đổi thành đường cong
+                }
+            ]
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: data
+        });
+
+        function toggleCurvedLines() {
+            var datasets = myChart.data.datasets;
+            for (var i = 0; i < datasets.length; i++) {
+                datasets[i].cubicInterpolationMode = 'monotone';
+            }
+            myChart.update();
+        }
+    </script>
+</body>
+</html>

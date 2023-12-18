@@ -1,0 +1,67 @@
+
+.switch_img {
+    width: 120px;
+	height: 120px;
+} /*  velikost obrazku  */
+
+.napisimg {
+	height: 28px;
+	width: 306px;
+	margin-top: 30px;
+} /*  velikost napisu  */
+
+body {
+	background: url("pozadi.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+	overflow-x: hidden;
+	color: white;
+	font-family: 'Calibri light';
+} /*  nastavení pozadi na celem tele stranky  */
+
+.stred {
+	background: url("pruhledne.png");
+	min-height: 450px;
+	max-width: 800px;
+    left: 50%;
+    right: 50%;
+    padding: 5px;
+    top: 50%;
+    margin-top: 8px;
+} /*  nastavení stredniho pruhledneho panelu  */
+
+#napis {margin-top: 60px;} /*  odrazeni napisu od hora  60px  */
+
+.sekce {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+} /*  posazeni na stred  */
+
+/*  nastavení sloupce  */
+.col {
+	display: block;
+	float: left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  skupiny  */
+.skupina:before,
+.skupina:after { content: ""; display: table; }
+.skupina:after { clear: both;}
+.skupina { zoom: 1; /* pojisteni pro starsi prohlizece */ }
+
+/*  Nastaveni velikosti pro jednotlivy item  */
+.span_1_of_3 { width: 32.26%; }
+/*
+.span_2_of_3 { width: 66.13%; }
+.span_1_of_3 { width: 32.26%; }
+*/
+
+/*  responzivní design, na zarizenich mensich nez 480px se preskladaji pod sebe */
+@media only screen and (max-width: 480px) {
+	.col {  margin: 5% 0 5% 0%; }
+	.span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
