@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>IOT-N13</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+  
+  .table-dark tr th {
+	text-align: center;
+}
+
+.table tbody tr td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* CSS cho các trang khác */
+#chartSelect {
+	padding: 5px; /* Kích thước padding bên trong select */
+	border: 1px solid red; /* Viền xung quanh select */
+	border-radius: 4px; /* Bo tròn viền của select */
+	font-size: 15px; /* Kích thước chữ */
+	background-color: #fff; /* Màu nền của select */
+	color: #333; /* Màu chữ của select */
+	appearance: none;
+	/* Ẩn giao diện mặc định của select (đối với trình duyệt webkit-based) */
+	cursor: pointer; /* Con trỏ khi hover qua select */
+}
+
+/* Tùy chỉnh giao diện cho tùy chọn option */
+#chartSelect option {
+	font-size: 14px; /* Kích thước chữ */
+	background-color: #fff; /* Màu nền của option */
+	color: #333; /* Màu chữ của option */
+}
+
+/* Tùy chỉnh giao diện khi select được nhấp chọn */
+#chartSelect:focus {
+	border-color: #007bff; /* Màu viền khi select được chọn */
+	box-shadow: 0 0 5px rgb(64, 128, 128);
+	/* Hiệu ứng bóng khi select được chọn */
+}
+
+/* Tùy chỉnh giao diện khi hover qua option */
+#chartSelect option:hover {
+	background-color: #007bff; /* Màu nền khi hover qua option */
+	color: #fff; /* Màu chữ khi hover qua option */
+}
+
+#page-numbers1 button {
+	margin-right: 1px;
+	margin-left: 1px;
+	width: 30px;
+}
+
+#pagination1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	/* Điều chỉnh khoảng cách giữa container và pagination theo ý muốn */
+}
+#pagination1 #page-numbers1 :active{
+	background-color: gray;
+}
+#page-numbers1 button.active {
+    border-color: gray !important;
+    background-color: gray !important;
+    color: white !important;
+}
+#page-numbers1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#page-numbers1 button {
+    margin-right: 1px;
+    margin-left: 1px;
+    width: 30px;
+    border: 1px solid black; /* Viền màu đen */
+}
+
+#page-numbers1 button.active {
+    border-color: gray; /* Viền màu đỏ cho nút đã chọn */
+    background-color: gray; /* Nền màu đỏ cho nút đã chọn */
+    color: white; /* Màu chữ trắng cho nút đã chọn */
+}
+#page-numbers2 button {
+	margin-right: 1px;
+	margin-left: 1px;
+	width: 30px;
+}
+
+#pagination2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	/* Điều chỉnh khoảng cách giữa container và pagination theo ý muốn */
+}
+#pagination2 #page-numbers2 :active{
+	background-color: gray;
+}
+#page-numbers2 button.active {
+    border-color: gray !important;
+    background-color: gray !important;
+    color: white !important;
+}
+#page-numbers2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#page-numbers2 button {
+    margin-right: 1px;
+    margin-left: 1px;
+    width: 30px;
+    border: 1px solid black; /* Viền màu đen */
+}
+
+#page-numbers2 button.active {
+    border-color: gray; /* Viền màu đỏ cho nút đã chọn */
+    background-color: gray; /* Nền màu đỏ cho nút đã chọn */
+    color: white; /* Màu chữ trắng cho nút đã chọn */
+}
+
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    text-align: center;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .modal-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+  }
+
+  .modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+.enlarged-modal img {
+            max-width: 350px;
+            max-height: 370px;
+            width: auto;
+            height: auto;
+        }
+         #enlargeButton {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            right: 0;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            z-index: 1; /* Để nút nằm phía trên hình ảnh */
+        }
+        #imageContainer {
+            display: none;
+            position: relative;
+        }
+        #closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="height: 45px">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+    
+    <select id="chartSelect" onchange="toggleChart()">
+        <option value="now">Hôm nay</option>
+        <option value="day">Chọn ngày</option>
+    </select>
+    <form style="margin-left: 10px" id="dateForm" action="/data/date" method="POST">
+      <input style="height: 30px" type="date" id="selectedDate" name="selectedDate">
+    </form>
+   
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <!-- Sidebar -->
+    <div style="height: 430px" class="sidebar" >
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex" >
+        <div class="image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Nhóm 13</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a style="background-color: rgb(32,178,170)" th:href="@{/history}" class="nav-link active">
+              <i class="nav-icon fa fa-history"></i>
+              <p>
+                Lịch Sử 
+              </p>
+            </a>
+          </li>        
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-institution"></i>
+              <p>
+                Quản Lý
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">4</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/timekeeping}" class="nav-link">
+                  <i class="fa fa-pencil-square-o nav-icon"></i>
+                  <p>Chấm Công</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/manageDevice}" class="nav-link">
+                  <i class="fa fa-share-alt-square nav-icon"></i>
+                  <p>Thiết Bị</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/control}" class="nav-link">
+                  <i class="fa fa-wifi nav-icon"></i>
+                  <p>Điều Khiển</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/getStatistical}" class="nav-link">
+                  <i class="fa fa-bar-chart nav-icon"></i>
+                  <p>Thống Kê</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+    <a href="#" class="nav-link btn btn-link" type="button" onclick="showImageContainer()"
+       style="text-align: left;">
+        <i class="fa fa-camera-retro nav-icon"></i>
+        <p>Camera</p>
+    </a>
+        </li>
+          <li class="nav-item" id="camera-li">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-sign-out nav-icon"></i>
+                  <p>Thoát</p>
+                </a>
+              </li>   
+        </ul>      
+      </nav>
+      <!-- /.sidebar-menu -->
+      
+    </div>
+    <div id="imageContainer">
+            <img id="camera" style="height: 162px; width: 237px; margin-left: 5px; cursor: pointer;">
+            <div id="closeButton" onclick="closeImage()">&#10006;</div>
+            <div style="width: 3px;height: 3px;margin-left: 120px" id="enlargeButton"><i class="fas fa-expand"></i></div>
+        </div>
+    <!-- /.sidebar -->
+  </aside>
+    <div id="customModal" class="custom-modal">
+        <div class="modal-content">
+            <span id="closeModal" style="float: right; cursor: pointer;">&times;</span>
+            <img id="enlargedCamera" src="">
+        </div>
+    </div>
+  <div id="table1" class="content-wrapper">
+    <div class="container">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Mã dữ liệu</th>
+                <th>Mã thiết bị</th>
+                <th>Mã Nhân Viên</th>      
+                <th>Tên nhân viên</th>
+                <th>Phòng ban</th>
+                <th>Ngày</th>
+                <th>Giờ vào</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+
+        <tbody id="data-table-body">
+    <!-- Dữ liệu sẽ được thêm vào đây -->
+        </tbody>
+
+    </table>
+     <div id="pagination1"> <!-- Sửa ID thành "pagination1" -->
+            <button style="border-color: gray;" onclick="prevPage1()">Trang trước</button>
+            <span id="page-numbers1"></span> <!-- Sửa ID thành "page-numbers1" -->
+            <button style="border-color: gray;" onclick="nextPage1()">Trang sau</button>
+        </div>
+    </div>
+  </div>
+  <div id="table2" class="content-wrapper">
+    <div class="container">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr style="line-height: 10px">
+                <th>Mã dữ liệu</th>
+                <th>Mã thiết bị</th>
+                <th>Mã Nhân Viên</th>               
+                <th>Tên nhân viên</th>
+                <th>Phòng ban</th>
+                <th>Ngày</th>
+                <th>Giờ vào</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+
+        <tbody id="table2Body">
+            <!-- Dữ liệu từ API sẽ được hiển thị ở đây -->
+        </tbody>
+
+    </table>
+    <div id="pagination2"> <!-- Sửa ID thành "pagination2" -->
+            <button style="border-color: gray;" onclick="prevPage2()">Trang trước</button>
+            <span id="page-numbers2"></span> <!-- Sửa ID thành "page-numbers2" -->
+            <button style="border-color: gray;" onclick="nextPage2()">Trang sau</button>
+        </div>
+    </div>
+  </div>
+  <!-- bang du lieu -->
+  
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+</body>
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<script>
+  // Ẩn table2 và dateForm ban đầu khi trang vừa tải
+  hideFormAndTable2();
+
+  function hideFormAndTable2() {
+    var table1 = document.getElementById("table1");
+    var table2 = document.getElementById("table2");
+    var dateForm = document.getElementById("dateForm");
+
+    table1.style.display = "block"; // Hiển thị table1
+    table2.style.display = "none"; // Ẩn table2
+    dateForm.style.display = "none"; // Ẩn dateForm
+  }
+
+  function toggleChart() {
+    var select = document.getElementById("chartSelect");
+    var table1 = document.getElementById("table1");
+    var table2 = document.getElementById("table2");
+    var dateForm = document.getElementById("dateForm");
+
+    if (select.value === "now") {
+      table1.style.display = "block";
+      table2.style.display = "none";
+      dateForm.style.display = "none"; // Ẩn form input date khi chọn "Hôm nay"
+    } else if (select.value === "day") {
+      table1.style.display = "none";
+      table2.style.display = "block";
+      dateForm.style.display = "block"; // Hiển thị form input date khi chọn "Theo ngày"
+    }
+  }
+  let table2Data = [];
+  let currentPage = 1;
+  const itemsPerPage = 9;
+
+  function displayDataOnPage2(pageNumber) {
+    const table2Body = document.getElementById('table2Body');
+    table2Body.innerHTML = '';
+
+    const startIndex = (pageNumber - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const dataToDisplay = table2Data.slice(startIndex, endIndex);
+
+    dataToDisplay.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.id}</td>
+        <td>${item.deviceId}</td>
+        <td>NV00${item.cardId}</td>        
+        <td>${item.eName}</td>
+        <td>${item.department}</td>
+        <td>${item.date}</td>
+        <td>${item.time_in}</td>
+        <td>${item.state}</td>
+      `;
+      table2Body.appendChild(row);
+    });
+  }
+
+  function updatePageNumbers2() {
+    const totalPages = Math.ceil(table2Data.length / itemsPerPage);
+    const pageNumbersElement = document.getElementById('page-numbers2');
+    pageNumbersElement.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      const pageNumberButton = document.createElement('button');
+      pageNumberButton.textContent = i;
+      pageNumberButton.dataset.page = i;
+
+      pageNumberButton.onclick = function () {
+        goToPage2(i);
+      };
+
+      pageNumbersElement.appendChild(pageNumberButton);
+    }
+
+    // Đánh dấu ô số 1 là đang xem mặc định
+    const firstPageButton = document.querySelector(`#page-numbers2 button[data-page="1"]`);
+    if (firstPageButton) {
+      firstPageButton.classList.add('active');
+      currentPage = 1;
+    }
+  }
+
+  function goToPage2(pageNumber) {
+    currentPage = pageNumber;
+    displayDataOnPage2(currentPage);
+
+    // Loại bỏ lớp 'active' từ tất cả nút trang
+    const allPageButtons = document.querySelectorAll('#page-numbers2 button');
+    allPageButtons.forEach(button => {
+      button.classList.remove('active');
+    });
+
+    // Đánh dấu nút trang đã chọn bằng lớp 'active'
+    const selectedButton = document.querySelector(`#page-numbers2 button[data-page="${pageNumber}"]`);
+    selectedButton.classList.add('active');
+  }
+
+  function nextPage2() {
+    if (currentPage < Math.ceil(table2Data.length / itemsPerPage)) {
+      currentPage++;
+      goToPage2(currentPage);
+    }
+  }
+
+  function prevPage2() {
+    if (currentPage > 1) {
+      currentPage--;
+      goToPage2(currentPage);
+    }
+  }
+
+  function updateTable2() {
+    var selectedDate = document.getElementById("selectedDate").value;
+    var table2Body = document.getElementById("table2Body");
+
+    // Gửi yêu cầu tới API để lấy dữ liệu dựa trên selectedDate
+    fetch('http://localhost:7777/manage/data/' + selectedDate)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        // Cập nhật table2Data với dữ liệu mới
+        table2Data = data;
+
+        // Hiển thị trang đầu tiên của table2 và cập nhật số trang
+        currentPage = 1;
+        displayDataOnPage2(currentPage);
+        updatePageNumbers2();
+      })
+      .catch(function (error) {
+        console.error('Lỗi khi tải dữ liệu từ API: ' + error);
+      });
+  }
+
+  // Sự kiện khi ngày thay đổi
+  document.getElementById("selectedDate").addEventListener("change", function () {
+    // Gọi hàm cập nhật table2 khi thay đổi ngày
+    updateTable2();
+  });
+
+  // Sự kiện nút trang trước
+  document.getElementById("prevButton2").addEventListener("click", function () {
+    if (currentPage > 1) {
+      prevPage2();
+    }
+  });
+
+  // Sự kiện nút trang sau
+  document.getElementById("nextButton2").addEventListener("click", function () {
+    if (currentPage < Math.ceil(table2Data.length / itemsPerPage)) {
+      nextPage2();
+    }
+  });
+
+  // Khởi chạy lần đầu
+  updateTable2();
+</script>
+
+<script type="text/javascript">
+    let tableData1 = [];
+    let currentPage1 = 1;
+    const itemsPerPage1 = 9;
+    let isFetchingData = false;
+
+    function updatePageNumbers1() {
+        const totalPages1 = Math.ceil(tableData1.length / itemsPerPage1);
+        const pageNumbersElement1 = document.getElementById('page-numbers1');
+        pageNumbersElement1.innerHTML = '';
+
+        for (let i = 1; i <= totalPages1; i++) {
+            const pageNumberButton = document.createElement('button');
+            pageNumberButton.textContent = i;
+            pageNumberButton.dataset.page = i;
+
+            pageNumberButton.onclick = function () {
+                goToPage1(i);
+            };
+
+            pageNumbersElement1.appendChild(pageNumberButton);
+        }
+
+        // Đánh dấu ô số 1 là đang xem mặc định
+        const firstPageButton = document.querySelector(`#page-numbers1 button[data-page="1"]`);
+        if (firstPageButton) {
+            firstPageButton.classList.add('active');
+            currentPage1 = 1;
+        }
+    }
+
+    function goToPage1(pageNumber) {
+        currentPage1 = pageNumber;
+        displayDataOnPage1(currentPage1);
+
+        // Loại bỏ lớp 'active' từ tất cả nút trang
+        const allPageButtons = document.querySelectorAll('#page-numbers1 button');
+        allPageButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+
+        // Đánh dấu nút trang đã chọn bằng lớp 'active'
+        const selectedButton = document.querySelector(`#page-numbers1 button[data-page="${pageNumber}"]`);
+        selectedButton.classList.add('active');
+    }
+
+    function displayDataOnPage1(pageNumber) {
+        const tableBody = document.getElementById('data-table-body');
+        tableBody.innerHTML = '';
+
+        const startIndex = (pageNumber - 1) * itemsPerPage1;
+        const endIndex = startIndex + itemsPerPage1;
+        const dataToDisplay = tableData1.slice(startIndex, endIndex);
+
+        dataToDisplay.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.id}</td>
+                <td>${item.deviceId}</td>
+                <td>NV00${item.cardId}</td>               
+                <td>${item.eName}</td>
+                <td>${item.department}</td>
+                <td>${item.date}</td>
+                <td>${item.time_in}</td>
+                <td>${item.state}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function fetchDataAndUpdateTable1() {
+        if (isFetchingData) {
+            return;
+        }
+
+        isFetchingData = true;
+
+        fetch('http://localhost:7777/manage/data')
+            .then(response => response.json())
+            .then(newData => {
+                // Lọc ra những dữ liệu mới (chưa có trong tableData1) và thêm vào tableData1
+                const uniqueNewData = newData.filter(newItem => !tableData1.some(item => item.id === newItem.id));
+                if (uniqueNewData.length > 0) {
+                    tableData1 = [...tableData1, ...uniqueNewData];
+                    displayDataOnPage1(currentPage1);
+                    updatePageNumbers1();
+                }
+
+                isFetchingData = false;
+            })
+            .catch(error => {
+                console.error('Lỗi khi gọi API: ', error);
+                isFetchingData = false;
+            })
+            .finally(() => {
+                // Gọi lại fetchDataAndUpdateTable1 sau 2 giây
+                setTimeout(fetchDataAndUpdateTable1, 2000);
+            });
+    }
+
+    function nextPage1() {
+        if (currentPage1 < Math.ceil(tableData1.length / itemsPerPage1)) {
+            currentPage1++;
+            goToPage1(currentPage1); // Cập nhật trang và đánh dấu nút trang mới
+        }
+    }
+
+    function prevPage1() {
+        if (currentPage1 > 1) {
+            currentPage1--;
+            goToPage1(currentPage1); // Cập nhật trang và đánh dấu nút trang mới
+        }
+    }
+
+    // Khởi chạy lần đầu
+    fetchDataAndUpdateTable1();
+</script>
+ <script>
+
+        // Khi nhấp vào nút đóng cửa sổ modal
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('customModal').classList.remove('enlarged-modal');
+            document.getElementById('customModal').style.display = 'none';
+        });
+
+        // Cho phép kéo di chuyển cửa sổ modal
+        var modal = document.getElementById('customModal');
+        var isDragging = false;
+        var offsetX, offsetY;
+
+        modal.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            offsetX = e.clientX - modal.getBoundingClientRect().left;
+            offsetY = e.clientY - modal.getBoundingClientRect().top;
+        });
+
+        document.addEventListener('mousemove', function (e) {
+            if (isDragging) {
+                modal.style.left = e.clientX - offsetX + 'px';
+                modal.style.top = e.clientY - offsetY + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', function () {
+            isDragging = false;
+        });
+        
+        document.getElementById('enlargeButton').addEventListener('click', function() {
+            var imageUrl = document.getElementById('camera').src;
+            document.getElementById('enlargedCamera').src = imageUrl;
+            document.getElementById('customModal').classList.add('enlarged-modal');
+            document.getElementById('customModal').style.display = 'block';
+        });
+        
+        
+ 
+    </script>
+
+</html>
+<script>
+    function showImageContainer(currentValue) {
+        if (currentValue === 'true') {
+            document.getElementById('imageContainer').style.display = 'none';
+        } else {
+            document.getElementById('imageContainer').style.display = 'block';
+            
+            // Tải luồng video trước khi hiển thị nó
+            var cameraElement = document.getElementById('camera');
+            cameraElement.src = 'http://localhost:6996/camera';
+            cameraElement.preload = 'auto'; // Sử dụng preload để tải video trước
+            cameraElement.load(); // Bắt đầu quá trình tải
+
+            // Sử dụng một sự kiện để kiểm tra khi video đã được tải hoàn toàn
+            cameraElement.addEventListener('loadeddata', function() {
+                // Video đã được tải hoàn toàn, có thể hiển thị nó ngay bây giờ
+            });
+        }
+    }
+
+    function closeImage() {
+        const disconnectPromise = fetch("http://localhost:6996/disconnect").then(response => {
+            if (!response.ok) {
+                throw new Error("Lỗi trong quá trình ngắt kết nối");
+            }
+        });
+
+        const hideImageContainerPromise = new Promise(resolve => {
+            // Ẩn khối imageContainer
+            var imageContainer = document.getElementById("imageContainer");
+            imageContainer.style.display = "none";
+            resolve();
+        });
+
+        Promise.all([disconnectPromise, hideImageContainerPromise])
+            .catch(error => {
+                console.error(error);
+            });
+    }
+</script>
+
+
+</script>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Manage</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 4 -->
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link href="css/login.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
+  <style>
+  
+  @charset "ISO-8859-1";
+
+/* sign in FORM */
+#logreg-forms{
+    width:400px;
+    margin:8% 35%;
+    background-color:#f3f3f3;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+  .table-dark tr th {
+            text-align: center;
+        }
+
+        .table tbody tr td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    .color-palette {
+      height: 35px;
+      line-height: 35px;
+      text-align: right;
+      padding-right: .75rem;
+    }
+    
+    .color-palette.disabled {
+      text-align: center;
+      padding-right: 0;
+      display: block;
+    }
+    
+    .color-palette-set {
+      margin-bottom: 15px;
+    }
+
+    .color-palette span {
+      display: none;
+      font-size: 12px;
+    }
+
+    .color-palette:hover span {
+      display: block;
+    }
+
+    .color-palette.disabled span {
+      display: block;
+      text-align: left;
+      padding-left: .75rem;
+    }
+
+    .color-palette-box h4 {
+      position: absolute;
+      left: 1.25rem;
+      margin-top: .75rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+      display: block;
+      z-index: 7;
+    }
+    .table-dark tr{
+    height: 5px;
+    }
+  </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input style="box-shadow: none" class="form-control form-control-navbar" name="keyword" type="search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Right navbar links -->
+    
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <i class="fa fa-user-o" style="margin-right: 4px;font-size: 16px;color: wheat;margin-top: 10px;margin-left: 10px"></i>
+        </div>
+        <div class="info" >
+          <a th:id="loginAdmin" th:href="@{#logreg-forms}" data-toggle="modal"  class="d-block">Tài khoản</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+     
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-history nav-icon"></i>
+                  <p>Lịch Sử</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Điểm Danh</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-cogs nav-icon"></i>
+                  <p>Quản Lý Thiết Bị</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-credit-card nav-icon"></i>
+                  <p>Quản Lý Thẻ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-user nav-icon"></i>
+                  <p>Quản Lý Tài Khoản</p>
+                </a>
+              </li>
+
+          </li>
+        </ul>
+      </nav>   
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  <div  class="content-wrapper">
+    <div class="container">
+     
+    </div>
+  </div>
+  <!-- Content Wrapper. Contains page content -->
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<div style="height: 285px" id="logreg-forms" class="modal fade" >	
+		    <div  th:if="${session.checkLoginAdmin!=null}"><input type="text" id="checkloginAdmin" hidden="1" th:value="${session.checkLoginAdmin}"></input></div>
+            <form class="form-signin" th:action="@{/checkLogin}" th:method="post">
+                <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Đăng nhập</h1>
+                <input name="user" th:value="${username}" type="text" id="inputEmail" class="form-control" placeholder="Tên đăng nhập" required="1" autofocus="">
+                <input style="margin-top: 15px" name="pass" th:value="${password}" type="password" id="inputPassword" class="form-control" placeholder="Mật khẩu" required="1">
+                <div style="margin-top: 7px">
+                    <input style="margin-left: 1px" th:checked="${rm}" name="remember" value="1" type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label style="margin-left: 25px" class="form-check-label" for="exampleCheck1">Ghi nhớ</label>
+                    <small style="color: red;margin-left: 20px" th:if="${session.messAdmin != null}">[[${session.messAdmin}]]</small>
+                </div>
+                <div style="margin-top: 15px">
+                <button style="margin-top: 2px" class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Đăng nhập</button>
+                </div>
+            </form>
+        </div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<script>
+var m = document.getElementById("checkloginAdmin");
+if (m == null){
+    document.getElementById("loginAdmin").click();
+ }
+</script>
+</body>
+</html>

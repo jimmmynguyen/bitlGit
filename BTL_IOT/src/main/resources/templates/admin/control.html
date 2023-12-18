@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Manage</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 4 -->
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link href="css/login.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
+  <style>
+   .content-wrapper{
+     background-image: url('../uploads/vanphong7.jpg');
+    background-size: cover; /* Tùy chỉnh để phù hợp với kích thước của div */
+    background-repeat: no-repeat; 
+    /* background-color: rgba(0, 0, 0, 0.61); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px auto;
+  /* color: white; */
+  font-size: 35px;
+}
+
+.dashboard{
+    display: flex;
+    justify-content: center;
+}
+
+.box1{
+  width: 300px;
+  height: 250px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px gray;
+  padding: 10px 20px;
+  position: relative;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.box1 h2{
+  margin: 10px 0px 0px 0px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.datetime{
+  margin: 10px 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.datetime p{
+  margin: 15px 0px 0px 0px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.tempsymbol{
+  margin-top: 20px;
+  margin-left: 38px;
+  padding:0px;
+}
+
+.cloud{
+  font-size: 30px;
+  color: #feb103;
+  margin-left: 10px;
+}
+
+.cloudy{
+  font-size: 28px;
+  font-weight: 800;
+  margin-left: 10px;
+}
+
+.temp{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.temp p{
+  color: #9e9e9e;
+  margin: 5px 0px 0px 0px;
+}
+
+.temp strong{
+  font-size: 20px;
+  margin-left: 15px;
+}
+
+.Temperature{
+  margin-right: 60px;
+}
+
+.box2{
+  width: 300px;
+  height: 250px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px gray;
+  padding: 0px 20px;
+  position: relative;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.box2 h2{
+  margin: 15px 0px;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge {
+  width: 100%;
+  max-width: 250px;
+  font-size: 32px;
+  color: #004033;
+}
+
+.gauge__body {
+  width: 100%;
+  height: 0;
+  padding-bottom: 50%;
+  background: lightgray;
+  position: relative;
+  border-top-left-radius: 100% 200%;
+  border-top-right-radius: 100% 200%;
+  overflow: hidden;
+}
+
+.gauge__fill {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: 100%;
+  background: #3976f6;
+  transform-origin: center top;
+  transform: rotate(0.25turn);
+  transition: transform 0.2s ease-out;
+}
+
+.gauge__cover {
+  width: 75%;
+  height: 150%;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 25%;
+  box-sizing: border-box;
+  font-size: 30px;
+  color: black;
+}
+
+.indicator{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.low{
+  margin: 0px 180px 0px 0px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.full{
+  margin: 0px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.devices{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.row1, .row2{
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.box{
+    width: 250px;
+    height: 235px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px gray;
+    padding: 10px 20px;
+    position: relative;
+    margin: 20px;
+}
+
+.box p{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+.box img{
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top:27px;
+    left: 175px;
+}
+
+.box .light{
+    display: none;
+    color: #3976f6;
+    font-size: 35px;
+    position: absolute;
+    top:29px;
+    left: 170px;
+}
+
+/* toggle */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 35px 30px 0px 65px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .rotate {
+    animation: rotation 1s infinite linear;
+  }
+  
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  } 
+  
+
+/* sign in FORM */
+#logreg-forms {
+	width: 400px;
+	margin: 8% 35%;
+	background-color: #f3f3f3;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.table-dark tr th {
+	text-align: center;
+}
+
+.table tbody tr td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.color-palette {
+	height: 35px;
+	line-height: 35px;
+	text-align: right;
+	padding-right: .75rem;
+}
+
+.color-palette.disabled {
+	text-align: center;
+	padding-right: 0;
+	display: block;
+}
+
+.color-palette-set {
+	margin-bottom: 15px;
+}
+
+.color-palette span {
+	display: none;
+	font-size: 12px;
+}
+
+.color-palette:hover span {
+	display: block;
+}
+
+.color-palette.disabled span {
+	display: block;
+	text-align: left;
+	padding-left: .75rem;
+}
+
+.color-palette-box h4 {
+	position: absolute;
+	left: 1.25rem;
+	margin-top: .75rem;
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 12px;
+	display: block;
+	z-index: 7;
+}
+
+.table-dark tr {
+	height: 5px;
+}
+
+.reviews-pagination {
+	text-align: center;
+}
+
+.reviews-pagination li {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	background-color: #FFF;
+	border: 1px solid #E4E7ED;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+}
+
+.reviews-pagination li:hover {
+	background-color: #E4E7ED;
+	color: #D10024;
+}
+
+.reviews-pagination li.active {
+	background-color: gray;
+	border-color: gray;
+	color: #FFF;
+	cursor: default;
+}
+
+.reviews-pagination li a {
+	display: block;
+}
+
+ul li a {
+	text-decoration: none;
+}
+</style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <form th:action="@{/findDevice}" class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input style="box-shadow: none" class="form-control form-control-navbar" name="keyword" type="search" placeholder="Tìm thiết bị" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+        <h1 style="font-size: 24px;margin-left: 130px;">Điều Khiển Thiết Bị</h1>
+    </div>
+    <!-- Right navbar links -->
+    
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex" >
+        <div class="image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Nhóm 13</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a style="background-color: rgb(32,178,170)" th:href="@{/history}" class="nav-link active">
+              <i class="nav-icon fa fa-history"></i>
+              <p>
+                Lịch Sử 
+              </p>
+            </a>
+          </li>      
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-institution"></i>
+              <p>
+                Quản Lý
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">4</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/timekeeping}" class="nav-link">
+                  <i class="fa fa-pencil-square-o nav-icon"></i>
+                  <p>Chấm Công</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/manageDevice}" class="nav-link ">
+                  <i class="fa fa-share-alt-square nav-icon"></i>
+                  <p>Thiết Bị</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/control}" class="nav-link active">
+                  <i class="fa fa-wifi nav-icon"></i>
+                  <p>Điều Khiển</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/getStatistical}" class="nav-link">
+                  <i class="fa fa-bar-chart nav-icon"></i>
+                  <p>Thống Kê</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-sign-out nav-icon"></i>
+                  <p>Thoát</p>
+                </a>
+              </li> 
+        </ul>
+      </nav>  
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+       <div class="container">   
+    <div class="dashboard">
+        <div class="devices">
+
+					<div class="row1">
+
+						<div class="box">
+							<p style="text-align: center; font-size: 25px; margin-top: 30px">Door</p>
+              <i class="fas fa-lightbulb-on light" id="lighton2"
+								style="width: 25px; height: 25px; color: #3976f6;"></i>
+              <div style="display: flex;"> <label style="font-size: 20px;margin-top: 12px;margin-left: 14px;">Auto</label> <label
+								style="margin: 12px 46px;" class="switch"> <input
+								type="checkbox" id="modeControl2" onchange="modeControlDoor()"><span
+								class="slider round"></span>
+							</label> </div> 
+							<i class="fas fa-lightbulb-on light" id="lighton2"
+								style="width: 25px; height: 25px; color: #3976f6;"></i> 
+                <div style="display: flex;"> <label style="font-size: 20px;margin-top: 12px;margin-left: 14px;">Open</label><label
+								style="margin: 12px 40px;" class="switch"> <input
+								type="checkbox" id="lightswitch2" onchange="door()"> <span
+								class="slider round"></span>
+							</label></div>
+						</div>
+
+						<div class="box">
+							<p style="text-align: center; font-size: 25px; margin-top: 30px">Còi</p>
+              <i class="fas fa-lightbulb-on light" id="lighton2"
+								style="width: 25px; height: 25px; color: #3976f6;"></i> 
+                <div style="display: flex;"> <label style="font-size: 20px;margin-top: 12px;margin-left: 14px;">Auto</label><label
+								style="margin: 12px 46px;" class="switch"> <input
+								type="checkbox" id="modeControl1" onchange="modeControlSiren()">
+								<span class="slider round"></span>
+							</label></div>
+							<i class="fas fa-lightbulb-on light" id="lighton2"
+								style="width: 25px; height: 25px; color: #3976f6;"></i> 
+                <div style="display: flex;"> <label style="font-size: 20px;margin-top: 12px;margin-left: 14px;">Open</label><label
+								style="margin: 12px 40px;" class="switch"> <input
+								type="checkbox" id="lightswitch1" onchange="siren()">
+								<span class="slider round"></span>
+							</label></div>
+						</div>
+
+					</div>
+				</div> 
+    </div>
+	  
+    </div>
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+<!-- ./wrapper -->
+<script>
+  function modeControlDoor() {
+    var modeControl = document.getElementById("modeControl2");
+    var lightSwitch = document.getElementById("lightswitch2");
+
+    if (modeControl.checked) {
+      // Chế độ Auto đã được bật
+      // Ngăn người dùng thay đổi trạng thái chế độ Open
+      lightSwitch.disabled = true;
+    } else {
+      // Chế độ Auto đã được tắt
+      // Cho phép người dùng thay đổi trạng thái chế độ Open
+      lightSwitch.disabled = false;
+    }
+  }
+
+  // Hàm xử lý khi thay đổi trạng thái công tắc (switch)
+  function door() {
+    var lightSwitch = document.getElementById("lightswitch2");
+    var xhr = new XMLHttpRequest();
+
+    if (lightSwitch.checked) {
+      // Bật Servo (Chỉ gửi yêu cầu khi không ở chế độ Auto)
+      xhr.open("GET", "http://172.20.10.2/on", true); // Thay thế bằng địa chỉ IP của ESP32 của bạn
+      xhr.send();
+    } else {
+      // Tắt Servo (Chỉ gửi yêu cầu khi không ở chế độ Auto)
+      xhr.open("GET", "http://172.20.10.2/off", true); // Thay thế bằng địa chỉ IP của ESP32 của bạn
+      xhr.send();
+    }
+  }
+</script>
+
+<script>
+  function modeControlSiren() {
+    var modeControl = document.getElementById("modeControl1");
+    var lightSwitch = document.getElementById("lightswitch1");
+
+    if (modeControl.checked) {
+      // Chế độ Auto đã được bật
+      // Ngăn người dùng thay đổi trạng thái chế độ Open
+      lightSwitch.disabled = true;
+    } else {
+      // Chế độ Auto đã được tắt
+      // Cho phép người dùng thay đổi trạng thái chế độ Open
+      lightSwitch.disabled = false;
+    }
+  }
+
+  // Hàm xử lý khi thay đổi trạng thái công tắc (switch)
+  function siren() {
+    var lightSwitch = document.getElementById("lightswitch1");
+    var xhr = new XMLHttpRequest();
+
+    if (lightSwitch.checked) {
+      // Bật Còi (Chỉ gửi yêu cầu khi không ở chế độ Auto)
+      xhr.open("GET", "http://172.20.10.2/coiOn", true); // Thay thế bằng địa chỉ IP của ESP32 của bạn
+      xhr.send();
+    } else {
+      // Tắt Còi (Chỉ gửi yêu cầu khi không ở chế độ Auto)
+      xhr.open("GET", "http://172.20.10.2/coiOff", true); // Thay thế bằng địa chỉ IP của ESP32 của bạn
+      xhr.send();
+    }
+  }
+</script>
+
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+
+</body>
+</html>
